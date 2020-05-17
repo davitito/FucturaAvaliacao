@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">	
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="cabecalho">
+		<h2 align="center">Veículos</h2>
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nome: " />
+			<p:inputText value="#{LoginBean.txtNomeVeic}" />
+			<p:outputLabel value="Marca: " />
+			<p:inputText value="#{LoginBean.txtMarcaVeic}" />
+			
+			<p:outputLabel value="Tipo:" />
+			<p:inputText value="#{LoginBean.txtTipoVeic}" />	
+						
+			<p:commandButton value="Novo" update="@form" actionListener="#{LoginBean.criarVeiculo}" />
+			<p:commandButton value="Pesquisar" update="@form" actionListener="#{LoginBean.pesquisarVeiculo}" />
+
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
