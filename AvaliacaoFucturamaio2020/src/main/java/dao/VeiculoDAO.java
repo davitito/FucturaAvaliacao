@@ -11,7 +11,7 @@ public interface VeiculoDAO {
 
 	public void remover(Veiculo veiculo);
 
-	public Veiculo pesquisar(String tipo);
+	public Veiculo pesquisar(String nome);
 
 	public List<Veiculo> listarTodos();
 

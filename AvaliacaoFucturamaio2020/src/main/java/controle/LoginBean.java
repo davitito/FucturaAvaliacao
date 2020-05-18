@@ -86,7 +86,9 @@ public class LoginBean {
 			if (achou) {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("veiculos.xhtml");			
 			} else {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				//FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+				FacesContext.getCurrentInstance()
+				.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atenção!", "Usuário não cadastrado ou senha inválida!!!"));
 			}
 		}else {
 			FacesContext.getCurrentInstance()
@@ -108,15 +110,13 @@ public class LoginBean {
 	}
 
 	public void cadastrarPecas() {
-		System.out.println("cadastrar pecas "+this.txtNomePeca + " "+this.txtDescricaoPeca);
+		System.out.println("cadastrar pecas "+this.txtNomePeca + " "+this.txtDescricaoPeca + " "+this.txtNomeVeic);
 		Peca novo = new Peca();
 		novo.setNome(this.txtNomePeca);
 		novo.setDescricao(this.txtDescricaoPeca);
+		novo.setNome_veiculo(this.txtNomeVeic);
 		boolean achou = false;
-		this.listaPecas = this.pecaDAO.listarTodos();
-		
-		System.out.println("lista pecas "+listaPecas);
-		
+		this.listaPecas = this.pecaDAO.listarTodos();		
 		for (Peca pecaPesquisa : listaPecas) {
 			if (pecaPesquisa.getNome().equals(this.txtNomePeca) &&
 					pecaPesquisa.getDescricao().equals(this.txtDescricaoPeca)) {
@@ -134,6 +134,7 @@ public class LoginBean {
 	}
 	
 	public void sairPecas() throws IOException {
+		this.txtNomeVeic = "";
 		FacesContext.getCurrentInstance().getExternalContext().redirect("veiculos.xhtml");
 	}
 	
@@ -153,37 +154,10 @@ public class LoginBean {
 			FacesContext.getCurrentInstance()
 			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veículo não existe!!!"));
 		}
-		/*
-		Veiculo novo = new Veiculo();
-		novo.setNome(this.txtNomeVeic);
-		novo.setMarca(this.txtMarcaVeic);
-		novo.setTipo(this.txtTipoVeic);
-		boolean achou = false;
-		this.listaVeiculos = this.veiculoDAO.listarTodos();
-		for (Veiculo veiculoPesquisa : listaVeiculos) {
-			if (veiculoPesquisa.getNome().equalsIgnoreCase ((this.txtNomeVeic)) &&
-					veiculoPesquisa.getMarca().equalsIgnoreCase ((this.txtMarcaVeic)) &&
-					veiculoPesquisa.getTipo().equalsIgnoreCase ((this.txtTipoVeic))) {
-				achou = true;
-			}
-		}
-		if(achou) {
-			System.out.println("Veículo encontrado");
-			FacesContext.getCurrentInstance()
-			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "OK!", "Veículo encontrado!!!"));
-			FacesContext.getCurrentInstance().getExternalContext().redirect("veiculos.xhtml");
-			this.txtNomeVeic = "";
-			this.txtMarcaVeic = "";
-			this.txtTipoVeic = "";
-		}else {
-			System.out.println("não encontrado");
-			FacesContext.getCurrentInstance()
-			.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veículo não existe!!!"));	
-		}
-		*/
 	}
 	public void criarVeiculo(){
 		Veiculo novo = new Veiculo();
+		
 		novo.setNome(this.txtNomeVeic);
 		novo.setMarca(this.txtMarcaVeic);
 		novo.setTipo(this.txtTipoVeic);

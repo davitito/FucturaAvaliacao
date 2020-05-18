@@ -15,7 +15,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 	public void inserir(Veiculo veiculo) {
 
 		String sql = "insert into VEICULOS (NOME, MARCA, TIPO) values (?, ?, ?)";
-
+		
 		Connection conexao;
 		try {
 			conexao = JpaUtil.getConexao();
@@ -25,7 +25,6 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			ps.setString(1, veiculo.getNome());
 			ps.setString(2, veiculo.getMarca());
 			ps.setString(3,  veiculo.getTipo());
-			//ps.setString(5,veiculo.getNome_pecas());
 
 			ps.execute();
 			ps.close();
@@ -47,11 +46,10 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
-		
 			ps.setString(1, veiculo.getMarca());
 			ps.setString(2, veiculo.getTipo());
 			ps.setString(3, veiculo.getNome());
-
+			
 			ps.execute();
 			ps.close();
 			
@@ -104,7 +102,6 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 				veiculo.setNome(res.getString("NOME"));
 				veiculo.setMarca(res.getString("MARCA"));
 				veiculo.setTipo(res.getString("TIPO"));
-				//veiculo.setNome_pecas(res.getString("NOME_PECAS"));
 			 }
 			
 			ps.close();
@@ -135,8 +132,6 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 				veiculo.setNome(res.getString("NOME"));
 				veiculo.setMarca(res.getString("MARCA"));
 				veiculo.setTipo(res.getString("TIPO"));
-				//veiculo.setNome_pecas(res.getString("NOME_PECAS"));
-				
 				listaVeiculos.add(veiculo);
 			 }
 			

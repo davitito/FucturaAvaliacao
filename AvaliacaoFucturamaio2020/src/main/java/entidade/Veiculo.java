@@ -3,24 +3,26 @@ package entidade;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="VEICULOS")
 public class Veiculo {
 
-	
+	@Id
 	@Column(name="NOME", nullable = false)
 	private String nome;
 	
 	@Column(name="MARCA", nullable = false)
 	private String marca;
 	
-	@Id
+	
 	@Column(name="TIPO", nullable = false)
 	private String tipo;
 
-
+	@ManyToOne
+	private Peca peca;
 	
 
 	public String getNome() {
@@ -47,6 +49,13 @@ public class Veiculo {
 		this.tipo = tipo;
 	}
 
-	
+	public Peca getPeca() {
+		return peca;
+	}
+
+	public void setPeca(Peca peca) {
+		this.peca = peca;
+	}
+
 
 }

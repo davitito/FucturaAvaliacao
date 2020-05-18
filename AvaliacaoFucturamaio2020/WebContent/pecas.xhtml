@@ -7,11 +7,14 @@
   </h:head>
   <h:body>
   	<h:form>
-  		<p:dialog header="Peças" modal="true" visible="true">	
+  		<p:dialog header="PEÇAS: Cadastre uma peça para o veículo." modal="true" visible="true">	
 	  		<p:panelGrid columns="2">
+				<p:outputLabel value="Veículo " />
+				<p:outputLabel value="#{LoginBean.txtNomeVeic}" />
+				
 				<p:outputLabel value="Nome: " />
 				<p:inputText value="#{LoginBean.txtNomePeca}" />
-				<p:outputLabel value="Marca: " />
+				<p:outputLabel value="Descrição: " />
 				<p:inputText value="#{LoginBean.txtDescricaoPeca}" />
 							
 				<p:commandButton value="Cadastrar" update="@form" actionListener="#{LoginBean.cadastrarPecas}" />

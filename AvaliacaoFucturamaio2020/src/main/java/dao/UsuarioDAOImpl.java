@@ -80,7 +80,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
-	public Usuario pesquisar(String cpf) {
+	public Usuario pesquisar(String email) {
 
 		String sql = "select U.CPF, U.NOME, U.SENHA from USUARIO U where email = ?";
 		
@@ -92,7 +92,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
-			ps.setString(1, cpf);
+			ps.setString(1, email);
 
 			ResultSet res = ps.executeQuery();
 

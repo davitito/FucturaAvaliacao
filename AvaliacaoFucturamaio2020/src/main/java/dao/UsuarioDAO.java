@@ -11,7 +11,7 @@ public interface UsuarioDAO {
 
 	public void remover(Usuario usuario);
 
-	public Usuario pesquisar(String cpf);
+	public Usuario pesquisar(String email);
 
 	public List<Usuario> listarTodos();
 

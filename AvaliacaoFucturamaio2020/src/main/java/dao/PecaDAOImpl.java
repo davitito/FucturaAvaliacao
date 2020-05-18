@@ -6,19 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import entidade.Peca;
 import util.JpaUtil;
 
 public class PecaDAOImpl implements PecaDAO {
 
 	public void inserir(Peca peca) {
-
-		String sql = "insert into PECAS (NOME, DESCRICAO) values (?, ?)";
-		System.out.println(sql);
-		System.out.println(peca.getNome());
-		System.out.println(peca.getDescricao());
-		
+		String sql = "insert into PECAS (NOME, DESCRICAO, NOME_VEICULO) values (?, ?, ?)";
 		Connection conexao;
 		try {
 			conexao = JpaUtil.getConexao();
@@ -27,6 +21,7 @@ public class PecaDAOImpl implements PecaDAO {
 			
 			ps.setString(1, peca.getNome());
 			ps.setString(2, peca.getDescricao());
+			ps.setString(3, peca.getNome_veiculo());
 
 			ps.execute();
 			ps.close();
@@ -103,7 +98,6 @@ public class PecaDAOImpl implements PecaDAO {
 				peca = new Peca();
 				peca.setNome(res.getString("NOME"));
 				peca.setDescricao(res.getString("DESCRICAO"));
-				//veiculo.setNome_pecas(res.getString("NOME_PECAS"));
 			 }
 			
 			ps.close();
