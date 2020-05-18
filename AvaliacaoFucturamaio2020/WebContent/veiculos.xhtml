@@ -1,31 +1,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">	
-
-<ui:composition template="/index.xhtml">
-	<ui:define name="cabecalho">
-		<h2 align="center">Veículos</h2>
-	</ui:define>
+      			xmlns:h="http://java.sun.com/jsf/html"
+      			xmlns:p="http://primefaces.org/ui"
+      			xmlns:ui="http://java.sun.com/jsf/facelets">
+  <h:head>
+    <title>Avaliação Fuctura</title>
+  </h:head>
+  <h:body>
+  	<h:form>
+  		<p:dialog header="Veículos" modal="true" visible="true">	
+	  		<p:panelGrid columns="2">
+			    <p:row>
+			        <p:outputLabel value= "Nome:"/>
+			    </p:row>
+			    <p:row>
+			        <p:inputText value= "#{LoginBean.txtNomeVeic}"/>
+			    </p:row>
+			    <p:row>
+			        <p:outputLabel value= "Marca:"/>
+			    </p:row>
+			    <p:row>
+			        <p:inputText value= "#{LoginBean.txtMarcaVeic}"/>
+			    </p:row>
+			    <p:row>
+			        <p:outputLabel value="Tipo:"/>
+			    </p:row>
+			    <p:row>
+			        <p:inputText value="#{LoginBean.txtTipoVeic}" />
+			    </p:row>
+				<p:row>
+					 <p:commandButton value="Novo" update="@form" actionListener="#{LoginBean.criarVeiculo}" />
+				</p:row>
+			    <p:row>
+					 <p:commandButton value="Pesquisar" update="@form" actionListener="#{LoginBean.pesquisarVeiculo}" />
+					 <p:commandButton value="Sair" update="@form" actionListener="#{LoginBean.sairVeiculo}" />
+				</p:row>
 	
-	<ui:define name="conteudo">
-		<p:panelGrid columns="2">
-			<p:outputLabel value="Nome: " />
-			<p:inputText value="#{LoginBean.txtNomeVeic}" />
-			<p:outputLabel value="Marca: " />
-			<p:inputText value="#{LoginBean.txtMarcaVeic}" />
+
+			</p:panelGrid>
 			
-			<p:outputLabel value="Tipo:" />
-			<p:inputText value="#{LoginBean.txtTipoVeic}" />	
-						
-			<p:commandButton value="Novo" update="@form" actionListener="#{LoginBean.criarVeiculo}" />
-			<p:commandButton value="Pesquisar" update="@form" actionListener="#{LoginBean.pesquisarVeiculo}" />
-
-		</p:panelGrid>
-
-	</ui:define>
-
-</ui:composition>
-
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+			
+  		</p:dialog>
+  		
+  		
+  	</h:form>
+    
+  </h:body>
 </html>

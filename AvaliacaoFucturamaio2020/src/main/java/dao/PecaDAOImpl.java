@@ -7,25 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidade.Veiculo;
+import entidade.Peca;
 import util.JpaUtil;
 
-public class VeiculoDAOImpl implements VeiculoDAO {
+public class PecaDAOImpl implements PecaDAO {
 
-	public void inserir(Veiculo veiculo) {
+	public void inserir(Peca peca) {
 
-		String sql = "insert into VEICULOS (NOME, MARCA, TIPO) values (?, ?, ?)";
-
+		String sql = "insert into PECAS (NOME, DESCRICAO) values (?, ?)";
+		System.out.println(sql);
+		System.out.println(peca.getNome());
+		System.out.println(peca.getDescricao());
+		
 		Connection conexao;
 		try {
 			conexao = JpaUtil.getConexao();
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
-			ps.setString(1, veiculo.getNome());
-			ps.setString(2, veiculo.getMarca());
-			ps.setString(3,  veiculo.getTipo());
-			//ps.setString(5,veiculo.getNome_pecas());
+			ps.setString(1, peca.getNome());
+			ps.setString(2, peca.getDescricao());
 
 			ps.execute();
 			ps.close();
@@ -37,9 +38,9 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 	}
 
 
-	public void alterar(Veiculo veiculo) {
+	public void alterar(Peca peca) {
 
-		String sql = "UPDATE VEICULOS SET MARCA = ?, TIPO = ? where NOME = ?";
+		String sql = "UPDATE PECAS SET DESCRICAO = ? where NOME = ?";
 
 		Connection conexao;
 		try {
@@ -48,9 +49,8 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
 		
-			ps.setString(1, veiculo.getMarca());
-			ps.setString(2, veiculo.getTipo());
-			ps.setString(3, veiculo.getNome());
+			ps.setString(1, peca.getDescricao());
+			ps.setString(2, peca.getNome());
 
 			ps.execute();
 			ps.close();
@@ -61,9 +61,9 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 
 	}
 
-	public void remover(Veiculo veiculo) {
+	public void remover(Peca peca) {
 
-		String sql = "DELETE FROM VEICULOS WHERE NOME = ?";
+		String sql = "DELETE FROM PECAS WHERE NOME = ?";
 
 		Connection conexao;
 		try {
@@ -71,7 +71,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			
-			ps.setString(1, veiculo.getNome());
+			ps.setString(1, peca.getNome());
 
 			ps.execute();
 			ps.close();
@@ -82,11 +82,11 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 
 	}
 
-	public Veiculo pesquisar(String nome) {
+	public Peca pesquisar(String nome) {
 		
-		String sql = "select V.NOME, V.MARCA, V.TIPO from VEICULOS V where NOME = ?";
+		String sql = "select P.NOME, P.DESCRICAO from PECAS P where NOME = ?";
 		
-		Veiculo veiculo = null;
+		Peca peca = null;
 		
 		
 		Connection conexao;
@@ -100,10 +100,9 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			ResultSet res = ps.executeQuery();
 
 			while (res.next()) {
-				veiculo = new Veiculo();
-				veiculo.setNome(res.getString("NOME"));
-				veiculo.setMarca(res.getString("MARCA"));
-				veiculo.setTipo(res.getString("TIPO"));
+				peca = new Peca();
+				peca.setNome(res.getString("NOME"));
+				peca.setDescricao(res.getString("DESCRICAO"));
 				//veiculo.setNome_pecas(res.getString("NOME_PECAS"));
 			 }
 			
@@ -112,14 +111,14 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return veiculo;
+		return peca;
 	}
 
-	public List<Veiculo> listarTodos() {
+	public List<Peca> listarTodos() {
 
-		String sql = "select V.NOME, V.MARCA, V.TIPO from VEICULOS V";
+		String sql = "select P.NOME, P.DESCRICAO from PECAS P";
 		
-		List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
+		List<Peca> listaPecas = new ArrayList<Peca>();
 		
 		Connection conexao;
 		try {
@@ -131,13 +130,12 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 
 			while (res.next()) {
 				
-				Veiculo veiculo = new Veiculo();
-				veiculo.setNome(res.getString("NOME"));
-				veiculo.setMarca(res.getString("MARCA"));
-				veiculo.setTipo(res.getString("TIPO"));
-				//veiculo.setNome_pecas(res.getString("NOME_PECAS"));
+				Peca peca = new Peca();
+				peca.setNome(res.getString("NOME"));
+				peca.setDescricao(res.getString("DESCRICAO"));
+				//Peca.setNome_pecas(res.getString("NOME_PECAS"));
 				
-				listaVeiculos.add(veiculo);
+				listaPecas.add(peca);
 			 }
 			
 			ps.close();
@@ -146,7 +144,7 @@ public class VeiculoDAOImpl implements VeiculoDAO {
 			e.printStackTrace();
 		}
 		
-		return listaVeiculos;
+		return listaPecas;
 
 	}
 

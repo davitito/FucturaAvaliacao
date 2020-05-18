@@ -18,7 +18,7 @@
   			<p:row>
   				<p:column width="100">
   				    <ui:insert name="menu">
-				      <p:commandButton value="Login" action="/paginas/login/login.xhtml" />
+				      <p:commandButton value="Login" action="login.xhtml" />
 				      <p:commandButton value="Novo Usuário" action="/paginas/usuario/novo.xhtml" />
 				    </ui:insert>
   				</p:column>
@@ -29,6 +29,10 @@
   				</p:column>
   			</p:row>
   		</p:panelGrid>
+  		
+  		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
   	</h:form>
     
   </h:body>
